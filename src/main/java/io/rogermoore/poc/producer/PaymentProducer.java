@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
+import java.util.Map;
+
 @RestController
 public class PaymentProducer {
 
@@ -26,7 +29,7 @@ public class PaymentProducer {
     private String topic;
 
     @RequestMapping( value = "/pay", method = RequestMethod.POST )
-    public ResponseEntity<String> makePayment(@RequestBody Payment payment) throws Exception {
+    public ResponseEntity<Map<String, String>> makePayment(@RequestBody Payment payment) throws Exception {
         LOGGER.info( "Producing Payment:'{}'", payment.getPaymentId() );
         kafkaTemplate.send( topic, payment );
         Thread.sleep( 1000 );
@@ -51,7 +54,7 @@ public class PaymentProducer {
         kafkaTemplate.send( topic, payment );
         Thread.sleep( 1000 );
 
-        return new ResponseEntity<String>("Made payment of " + payment.getAmount() + " to " + payment.getRecipient() + ".", HttpStatus.OK );
+        return new ResponseEntity<Map<String, String>>(Collections.singletonMap("success", "Made payment of " + payment.getAmount() + " to " + payment.getRecipient() + "."), HttpStatus.OK );
     }
 
 }
