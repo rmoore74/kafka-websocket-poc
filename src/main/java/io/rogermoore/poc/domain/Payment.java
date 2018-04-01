@@ -14,14 +14,13 @@ public class Payment {
 
     private final String recipient;
 
-    private PaymentStatus status;
+    private PaymentStatus status =  PaymentStatus.INITIATED;
 
     public Payment() {
         this.paymentId = null;
         this.amount = 0.0;
-        this.sender = "";
-        this.recipient = "";
-        this.status = PaymentStatus.INITIATED;
+        this.sender = null;
+        this.recipient = null;
     }
 
     public Payment(UUID paymentId, Double amount, String sender, String recipient ) {
@@ -29,7 +28,6 @@ public class Payment {
         this.amount = amount;
         this.sender = sender;
         this.recipient = recipient;
-        this.status = PaymentStatus.INITIATED;
     }
 
     public UUID getPaymentId() {
@@ -54,6 +52,19 @@ public class Payment {
 
     public void setStatus( PaymentStatus status ) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder( "[ " );
+
+        builder.append( "payment_id: '" ).append( paymentId.toString() ).append( "', " );
+        builder.append( "amount: '" ).append( amount.toString() ).append( "', " );
+        builder.append( "sender: '" ).append( sender ).append( "', " );
+        builder.append( "recipient: '" ).append( recipient ).append( "', " );
+        builder.append( "status: '" ).append( status.toString() ).append( "' ]" );
+
+        return builder.toString();
     }
 
 }
