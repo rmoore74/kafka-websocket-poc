@@ -2,10 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>kafka-websocket-poc</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/app.js"></script>
 </head>
 <body>
-
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable Javascript and reload this page!</h2></noscript>
+<div class="container">
+    <h1>kafka-websocket-poc</h1>
+    <p>Simple proof-of-concept project to explore Spring Boot, Kafka and websocket integration.</p>
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="connect">WebSocket connection:</label>
+            <button id="connect" class="btn btn-default" type="submit">Connect</button>
+            <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
+            </button>
+        </div>
+    </form>
+    <h3>Payment Queue</h3>
+    <div class="table-responsive">
+        <table id="payment-queue" class="table">
+            <caption>Payment process logged below using WebSockets.</caption>
+            <thead>
+            <tr>
+                <th>UUID</th>
+                <th>Sender</th>
+                <th>Recipient</th>
+                <th>Amount</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 </body>
 </html>

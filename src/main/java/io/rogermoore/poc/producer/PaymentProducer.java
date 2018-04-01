@@ -27,27 +27,27 @@ public class PaymentProducer {
 
     @RequestMapping( value = "/pay", method = RequestMethod.POST )
     public ResponseEntity<String> makePayment(@RequestBody Payment payment) throws Exception {
-        LOGGER.info( "Payment='{}', status='{}'", payment.getPaymentId(), payment.getStatus() );
+        LOGGER.info( "Producing Payment:'{}'", payment.getPaymentId() );
         kafkaTemplate.send( topic, payment );
         Thread.sleep( 1000 );
 
         payment.setStatus(PaymentStatus.PAYMENT_RECEIVED);
-        LOGGER.info( "Payment='{}', status='{}'", payment.getPaymentId(), payment.getStatus() );
+        LOGGER.info( "Producing Payment:'{}'", payment.getPaymentId() );
         kafkaTemplate.send( topic, payment );
         Thread.sleep( 1000 );
 
         payment.setStatus(PaymentStatus.PAYMENT_PROCESSING);
-        LOGGER.info( "Payment='{}', status='{}'", payment.getPaymentId(), payment.getStatus() );
+        LOGGER.info( "Producing Payment:'{}'", payment.getPaymentId() );
         kafkaTemplate.send( topic, payment );
         Thread.sleep( 1000 );
 
         payment.setStatus(PaymentStatus.PAYMENT_PROCESSED);
-        LOGGER.info( "Payment='{}', status='{}'", payment.getPaymentId(), payment.getStatus() );
+        LOGGER.info( "Producing Payment:'{}'", payment.getPaymentId() );
         kafkaTemplate.send( topic, payment );
         Thread.sleep( 1000 );
 
         payment.setStatus(PaymentStatus.COMPLETE);
-        LOGGER.info( "Payment='{}', status='{}'", payment.getPaymentId(), payment.getStatus() );
+        LOGGER.info( "Producing Payment:'{}'", payment.getPaymentId() );
         kafkaTemplate.send( topic, payment );
         Thread.sleep( 1000 );
 
