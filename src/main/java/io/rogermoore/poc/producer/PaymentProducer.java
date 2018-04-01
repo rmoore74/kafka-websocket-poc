@@ -51,7 +51,7 @@ public class PaymentProducer {
         kafkaTemplate.send( topic, payment );
         Thread.sleep( 1000 );
 
-        return new ResponseEntity<String>("Making payment of " + payment.getAmount() + " to " + payment.getRecipient(), HttpStatus.OK );
+        return new ResponseEntity<String>("Made payment of " + payment.getAmount() + " to " + payment.getRecipient() + ".", HttpStatus.OK );
     }
 
 }

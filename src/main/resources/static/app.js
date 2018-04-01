@@ -26,7 +26,7 @@ function disconnect() {
 }
 
 function showPayment(payment) {
-    $("#payment-queue").append("<tr><td>" + payment['paymentId'] + "</td><td>" + payment['sender'] + "</td><td> " + payment['recipient'] + "</td><td>" + payment['amount'] + "</td><td>" + payment['status'] + "</td></tr>");
+    $("#payment-queue").prepend("<tr><td>" + payment['paymentId'] + "</td><td>" + payment['sender'] + "</td><td> " + payment['recipient'] + "</td><td>" + payment['amount'] + "</td><td>" + payment['status'] + "</td></tr>");
 }
 
 $(function () {

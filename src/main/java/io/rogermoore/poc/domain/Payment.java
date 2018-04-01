@@ -17,14 +17,14 @@ public class Payment {
     private PaymentStatus status =  PaymentStatus.INITIATED;
 
     public Payment() {
-        this.paymentId = null;
+        this.paymentId = UUID.randomUUID();
         this.amount = 0.0;
         this.sender = null;
         this.recipient = null;
     }
 
-    public Payment(UUID paymentId, Double amount, String sender, String recipient ) {
-        this.paymentId = paymentId;
+    public Payment( Double amount, String sender, String recipient ) {
+        this.paymentId = UUID.randomUUID();
         this.amount = amount;
         this.sender = sender;
         this.recipient = recipient;
