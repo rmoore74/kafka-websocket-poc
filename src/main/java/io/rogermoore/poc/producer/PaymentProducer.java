@@ -20,7 +20,7 @@ import java.util.Map;
 @RestController
 public class PaymentProducer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger( PaymentProducer.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger(PaymentProducer.class);
 
     @Autowired
     private KafkaTemplate kafkaTemplate;
@@ -28,33 +28,33 @@ public class PaymentProducer {
     @Value("${kafka.topic.payment}")
     private String topic;
 
-    @RequestMapping( value = "/pay", method = RequestMethod.POST )
+    @RequestMapping(value = "/pay", method = RequestMethod.POST)
     public ResponseEntity<Map<String, String>> makePayment(@RequestBody Payment payment) throws Exception {
-        LOGGER.info( "Producing Payment:'{}'", payment.getPaymentId() );
-        kafkaTemplate.send( topic, payment );
-        Thread.sleep( 1000 );
+        LOGGER.info("Producing Payment:'{}'", payment.getPaymentId());
+        kafkaTemplate.send(topic, payment);
+        Thread.sleep(1000);
 
         payment.setStatus(PaymentStatus.PAYMENT_RECEIVED);
-        LOGGER.info( "Producing Payment:'{}'", payment.getPaymentId() );
-        kafkaTemplate.send( topic, payment );
-        Thread.sleep( 1000 );
+        LOGGER.info("Producing Payment:'{}'", payment.getPaymentId());
+        kafkaTemplate.send(topic, payment);
+        Thread.sleep(1000);
 
         payment.setStatus(PaymentStatus.PAYMENT_PROCESSING);
-        LOGGER.info( "Producing Payment:'{}'", payment.getPaymentId() );
-        kafkaTemplate.send( topic, payment );
-        Thread.sleep( 1000 );
+        LOGGER.info("Producing Payment:'{}'", payment.getPaymentId());
+        kafkaTemplate.send(topic, payment);
+        Thread.sleep(1000);
 
         payment.setStatus(PaymentStatus.PAYMENT_PROCESSED);
-        LOGGER.info( "Producing Payment:'{}'", payment.getPaymentId() );
-        kafkaTemplate.send( topic, payment );
-        Thread.sleep( 1000 );
+        LOGGER.info("Producing Payment:'{}'", payment.getPaymentId());
+        kafkaTemplate.send(topic, payment);
+        Thread.sleep(1000);
 
         payment.setStatus(PaymentStatus.COMPLETE);
-        LOGGER.info( "Producing Payment:'{}'", payment.getPaymentId() );
-        kafkaTemplate.send( topic, payment );
-        Thread.sleep( 1000 );
+        LOGGER.info("Producing Payment:'{}'", payment.getPaymentId());
+        kafkaTemplate.send(topic, payment);
+        Thread.sleep(1000);
 
-        return new ResponseEntity<Map<String, String>>(Collections.singletonMap("success", "Made payment of " + payment.getAmount() + " to " + payment.getRecipient() + "."), HttpStatus.OK );
+        return new ResponseEntity<Map<String, String>>(Collections.singletonMap("success", "Made payment of " + payment.getAmount() + " to " + payment.getRecipient() + "."), HttpStatus.OK);
     }
 
 }

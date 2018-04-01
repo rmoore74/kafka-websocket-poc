@@ -32,22 +32,22 @@ public class PaymentConsumerConfig {
     public Map<String, Object> consumerConfigs() {
         Map<String, Object> props = new HashMap<>();
 
-        props.put( ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers );
-        props.put( ConsumerConfig.GROUP_ID_CONFIG, groupId );
-        props.put( ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest" );
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
         return props;
     }
 
     @Bean
     public ConsumerFactory<String, Payment> consumerFactory() {
-        return new DefaultKafkaConsumerFactory<>( consumerConfigs(), stringKeyDeserializer(), paymentJsonValueDeserializer() );
+        return new DefaultKafkaConsumerFactory<>(consumerConfigs(), stringKeyDeserializer(), paymentJsonValueDeserializer());
     }
 
     @Bean
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, Payment>> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, Payment> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory( consumerFactory() );
+        factory.setConsumerFactory(consumerFactory());
         return factory;
     }
 
@@ -58,7 +58,7 @@ public class PaymentConsumerConfig {
 
     @Bean
     public Deserializer paymentJsonValueDeserializer() {
-        return new JsonDeserializer( Payment.class );
+        return new JsonDeserializer(Payment.class);
     }
 
 }

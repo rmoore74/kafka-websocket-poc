@@ -14,7 +14,7 @@ public class Payment {
 
     private final String recipient;
 
-    private PaymentStatus status =  PaymentStatus.INITIATED;
+    private PaymentStatus status = PaymentStatus.INITIATED;
 
     public Payment() {
         this.paymentId = UUID.randomUUID();
@@ -23,7 +23,7 @@ public class Payment {
         this.recipient = null;
     }
 
-    public Payment( Double amount, String sender, String recipient ) {
+    public Payment(Double amount, String sender, String recipient) {
         this.paymentId = UUID.randomUUID();
         this.amount = amount;
         this.sender = sender;
@@ -50,19 +50,19 @@ public class Payment {
         return status;
     }
 
-    public void setStatus( PaymentStatus status ) {
+    public void setStatus(PaymentStatus status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder( "[ " );
+        StringBuilder builder = new StringBuilder("[ ");
 
-        builder.append( "payment_id: '" ).append( paymentId.toString() ).append( "', " );
-        builder.append( "amount: '" ).append( amount.toString() ).append( "', " );
-        builder.append( "sender: '" ).append( sender ).append( "', " );
-        builder.append( "recipient: '" ).append( recipient ).append( "', " );
-        builder.append( "status: '" ).append( status.toString() ).append( "' ]" );
+        builder.append("payment_id: '").append(paymentId.toString()).append("', ");
+        builder.append("amount: '").append(amount.toString()).append("', ");
+        builder.append("sender: '").append(sender).append("', ");
+        builder.append("recipient: '").append(recipient).append("', ");
+        builder.append("status: '").append(status.toString()).append("' ]");
 
         return builder.toString();
     }

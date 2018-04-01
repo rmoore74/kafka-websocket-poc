@@ -11,15 +11,15 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class PaymentConsumer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger( PaymentConsumer.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger(PaymentConsumer.class);
 
     @Autowired
     private SimpMessagingTemplate template;
 
-    @KafkaListener( topics = "${kafka.topic.payment}", groupId = "${kafka.group-id}" )
-    public void receive( Payment payload ) {
-        LOGGER.info( "Received Payment='{}'", payload.toString() );
-        template.convertAndSend( "/topic/payments", payload );
+    @KafkaListener(topics = "${kafka.topic.payment}", groupId = "${kafka.group-id}")
+    public void receive(Payment payload) {
+        LOGGER.info("Received Payment='{}'", payload.toString());
+        template.convertAndSend("/topic/payments", payload);
     }
 
 }
